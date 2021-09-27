@@ -1,0 +1,166 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7058155741623876632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c601fc834cd7f44eb10714a8a1b6b0c, type: 3}
+  m_Name: NewNormalCustomRenderPassFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  normal_material: {fileID: 2100000, guid: 99534b7b8135ae04c91c22b32538991f, type: 2}
+--- !u!114 &-5591108716256365201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d177a81b5d66b6c4eb135302b324d2c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  custom_full_screen_material: {fileID: 0}
+  tex_cloud: {fileID: 0}
+--- !u!114 &-4880210817659250816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01314d1c0e7eca342911e85f501dfad9, type: 3}
+  m_Name: NewRayTraceFogRenderPassFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  raytrace_material_: {fileID: 2100000, guid: 66d5b59777d06fb4580275e475004f1d, type: 2}
+  raytrace_count_: 10
+  scale_: 1
+--- !u!114 &-4422465508345476390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d177a81b5d66b6c4eb135302b324d2c8, type: 3}
+  m_Name: NewFogCustomRenderPassFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  custom_full_screen_material: {fileID: 2100000, guid: 4074d71dc7d38cb45b523d9c9a965eb4, type: 2}
+  tex_cloud: {fileID: 2800000, guid: dcb4f6baebdb4c146b818b20b0e322ea, type: 3}
+--- !u!114 &-789108453331583884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9172e1b962ea9e48a6021c042aa8827, type: 3}
+  m_Name: NewNormalShowRenderPassFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  normal_show_material: {fileID: 2100000, guid: fe0b9b0496ccf29459f3ad6e6ad55c5b, type: 2}
+--- !u!114 &-291480526941474353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d177a81b5d66b6c4eb135302b324d2c8, type: 3}
+  m_Name: NewFogCustomRenderPassFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  custom_full_screen_material: {fileID: 0}
+  tex_cloud: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de640fe3d0db1804a85f9fc8f5cadab6, type: 3}
+  m_Name: UniversalRenderPipelineAsset_Renderer
+  m_EditorClassIdentifier: 
+  m_RendererFeatures:
+  - {fileID: -4422465508345476390}
+  - {fileID: 8463131462078489136}
+  - {fileID: -7058155741623876632}
+  - {fileID: -789108453331583884}
+  - {fileID: -4880210817659250816}
+  m_RendererFeatureMap: da8aa6270d3fa0c230e29ea439157375e80320abbf640c9e74bce9e50a860cf580d766281e0246bc
+  postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
+  xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
+  shaders:
+    blitPS: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
+    copyDepthPS: {fileID: 4800000, guid: d6dae50ee9e1bfa4db75f19f99355220, type: 3}
+    screenSpaceShadowPS: {fileID: 4800000, guid: 0f854b35a0cf61a429bd5dcfea30eddd, type: 3}
+    samplingPS: {fileID: 4800000, guid: 04c410c9937594faa893a11dceb85f7e, type: 3}
+    tileDepthInfoPS: {fileID: 0}
+    tileDeferredPS: {fileID: 0}
+    stencilDeferredPS: {fileID: 4800000, guid: e9155b26e1bc55942a41e518703fe304, type: 3}
+    fallbackErrorPS: {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    materialErrorPS: {fileID: 4800000, guid: 5fd9a8feb75a4b5894c241777f519d4e, type: 3}
+  m_OpaqueLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_TransparentLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_DefaultStencilState:
+    overrideStencilState: 0
+    stencilReference: 0
+    stencilCompareFunction: 8
+    passOperation: 2
+    failOperation: 0
+    zFailOperation: 0
+  m_ShadowTransparentReceive: 1
+  m_RenderingMode: 0
+  m_AccurateGbufferNormals: 0
+--- !u!114 &8370862788417902354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef3771d8247c3f409105e978096bb48, type: 3}
+  m_Name: NewAdditionPostProcessRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  shader: {fileID: 4800000, guid: c2b8d2ba1cbb47148961ea3b747a2ecf, type: 3}
+--- !u!114 &8463131462078489136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a93bd1e5da72c40bd422eeeb1e54bd, type: 3}
+  m_Name: NewScreenScanRenderPassFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  screen_scan_material: {fileID: 2100000, guid: 2d30d16682f956c4ea019fbba93f8a0a, type: 2}
