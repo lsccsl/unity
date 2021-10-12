@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d177a81b5d66b6c4eb135302b324d2c8, type: 3}
   m_Name: NewFogCustomRenderPassFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   custom_full_screen_material: {fileID: 2100000, guid: 4074d71dc7d38cb45b523d9c9a965eb4, type: 2}
   tex_cloud: {fileID: 2800000, guid: dcb4f6baebdb4c146b818b20b0e322ea, type: 3}
 --- !u!114 &-789108453331583884
@@ -162,5 +162,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a93bd1e5da72c40bd422eeeb1e54bd, type: 3}
   m_Name: NewScreenScanRenderPassFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   screen_scan_material: {fileID: 2100000, guid: 2d30d16682f956c4ea019fbba93f8a0a, type: 2}
