@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
+
 public class FogCustomRenderPassFeature : ScriptableRendererFeature
 {
     class FogCustomRenderPass : ScriptableRenderPass
@@ -46,6 +47,11 @@ public class FogCustomRenderPassFeature : ScriptableRendererFeature
                 //cloud_rotate = Matrix4x4.Rotate(Quaternion.AxisAngle(new Vector3(0, 1, 0),9 * Time.time));
                 cloud_rotate = Matrix4x4.Rotate(Quaternion.Euler(0, 30 * Time.time, 0));
                 custom_full_screen_material.SetMatrix("_mtx_cloud_uv_rotate", cloud_rotate);
+
+                var dir = Vector3.forward;
+                var mtx_rotate = Matrix4x4.Rotate(Quaternion.Euler(0.0f, 30.0f, 0.0f));
+                custom_full_screen_material.SetVector("_NoiseOffset0", dir);
+                custom_full_screen_material.SetVector("_NoiseOffset1", mtx_rotate.MultiplyVector(dir));
 
                 //Debug.Log("screen height:" + cam.scaledPixelHeight + " screen width:" + cam.scaledPixelWidth);
 

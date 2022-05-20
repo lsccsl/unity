@@ -18,7 +18,7 @@ public class test_teddy_timeline : MonoBehaviour
 
         foreach (var bind in pd_.playableAsset.outputs)
         {
-            Debug.Log(bind.streamName + ":[" + bind + "]");
+            //Debug.Log(bind.streamName + ":[" + bind + "]");
             if (dic_pd_bind_.ContainsKey(bind.streamName))
                 continue;
             dic_pd_bind_[bind.streamName] = bind;

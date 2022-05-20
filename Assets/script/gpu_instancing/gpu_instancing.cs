@@ -46,6 +46,11 @@ public class gpu_instancing : MonoBehaviour
 
     void Start()
     {
+        if (gobj_line_count_ * gobj_count_perline_ > 1023)
+        {
+            Debug.Log("too many instancing");
+        }
+
         tex_ani_tmp_ = tex_ani_;
 
         int total_count = gobj_line_count_ * gobj_count_perline_;
@@ -133,6 +138,7 @@ public class gpu_instancing : MonoBehaviour
         var tex_clr_identity = tex_ani_tmp_.GetPixels();
         int texel_index_identity = 0;
 
+        animator.playbackTime = 0;
         for (int j = 0; j < frame_count; j++)
         {
             float t = (j / (float)frame_count) * tmp_ani_clip.length;
@@ -169,7 +175,7 @@ public class gpu_instancing : MonoBehaviour
 
                         tex_clr_identity[texel_index_identity++] = new Color(row.x, row.y, row.z, row.w);
                     }
-                    Debug.Log(bone_idx + ":" + bones[bone_idx].name + " " + tmp_mtx);
+                    //Debug.Log(bone_idx + ":" + bones[bone_idx].name + " " + tmp_mtx);
                 }
             }
         }
@@ -206,8 +212,8 @@ public class gpu_instancing : MonoBehaviour
             for (int j = 0; j < gobj_count_perline_; j++)
             {
                 Vector3 tmppos = pos;
-                tmppos.z = pos.z + 2.0f * i;
-                tmppos.x = pos.x + 2.0f * j;
+                tmppos.z = pos.z + 1.0f * i;
+                tmppos.x = pos.x + 1.0f * j;
 
                 var scale = new Vector3(1.0f, 1.0f, 1.0f);
                 Quaternion q = Quaternion.AngleAxis(30, Vector3.up);

@@ -34,6 +34,8 @@ Shader "lsc/test_post_fog"
             SAMPLER(sampler_LinearClamp);//work
             float4x4 _mtx_cloud_uv_rotate;
             float4 _cloud_offset_scale;
+            float3 _NoiseOffset0, _NoiseOffset1;
+
             //SAMPLER(sampler_CloudTex)
             //{
             //    Filter = MIN_MAG_MIP_LINEAR;
@@ -55,6 +57,29 @@ Shader "lsc/test_post_fog"
                 float4 screen_pos : TEXCOORD1;
                 float2 ndc_pos : TEXCOORD2;
             };
+
+            float hash(float3 p)//只随机向量的长度,方向不随机,并计算出点乘
+            {
+                p = frac(p * 0.3183099 + 0.1);
+                p *= 17.0;
+                return frac(p.x * p.y * p.z * (p.x + p.y + p.z));
+            }
+
+            float Noise(float3 x)//柏林噪声函数
+            {
+                float3 p = floor(x);
+                float3 f = frac(x);
+                f *= f * (3.0 - f - f);
+
+                return lerp(lerp(lerp(hash(p + float3(0, 0, 0)),//用 3x^2 - 2x^2插值
+                    hash(p + float3(1, 0, 0)), f.x),
+                    lerp(hash(p + float3(0, 1, 0)),
+                        hash(p + float3(1, 1, 0)), f.x), f.y),
+                    lerp(lerp(hash(p + float3(0, 0, 1)),
+                        hash(p + float3(1, 0, 1)), f.x),
+                        lerp(hash(p + float3(0, 1, 1)),
+                            hash(p + float3(1, 1, 1)), f.x), f.y), f.z);
+            }
 
             v2f vert (appdata v)
             {
@@ -91,8 +116,13 @@ Shader "lsc/test_post_fog"
                 //lsc 世界
                 world_pos = mul(_mtx_view_inv, float4(view_pos.xyz, 1));
 
+                float n = saturate(
+                    Noise(world_pos.xyz * 0.005 * 60          + _Time.y * 3 * _NoiseOffset0) * 0.8 +
+                    Noise(world_pos.xyz * 0.005 * 60 * 3.3333 + _Time.y * 3 * _NoiseOffset1) * 0.8 * 0.375
+                );
+
                 //高度雾衰减
-                float h_percent = saturate(((world_pos.y - 0.0f) / 20.0f));
+                float h_percent = saturate(((world_pos.y - 20.0f) / 100.0f));
                 float fac_h = exp(-h_percent * h_percent);
 
                 //距离雾衰减
@@ -116,8 +146,20 @@ Shader "lsc/test_post_fog"
                 cloud.r = cloud.r * pow(clamp(1 - cloud_dis / (_cloud_offset_scale.z * 0.6), 0, 1), 1);
                 col.xyz = lerp(col.xyz, float3(0, 0, 0), cloud.r); //return col;
 
+                float dmix = smoothstep(50, 100, dis);
+                float dmix1 = smoothstep(0.2, 1, 1-exp(-dis/100));
+                float fac_d_final = fac_d * (n * (1 - dmix) + dmix) * (dmix1);
+
+                float hmix = smoothstep(100, 0, world_pos.y);
+                float hmix1 = smoothstep(0.2, 1, exp(-world_pos.y / 200));
+                float fac_h_final = fac_h * (n * (1 - hmix) + hmix) * (hmix1);
+
                 //最终雾效
-                final_col.rgb = lerp(col.rgb, float3(0.2, 0.5, 0.8), fac_d * fac_h * 1);
+                float fac_final = saturate(fac_d_final * fac_h_final);
+                final_col.rgb = lerp(col.rgb, float3(0.2, 0.5, 0.8), fac_final);
+
+//final_col.rgb = lerp(col.rgb, float3(0.7, 0.7, 0.7), saturate(fac_h * (n+1)));
+//final_col.rgb = pow(lerp(pow(tex2D(_MainTex, i.uv).rgb, 0.454545), float3(0.2, 0.5, 0.8), saturate(fac_d * fac_h * (n + 1))), 2.2);
 
                 return final_col;
             }
